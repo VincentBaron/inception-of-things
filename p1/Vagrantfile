@@ -1,0 +1,27 @@
+# Vagrantfile for setting up a 3-node K3s Kubernetes cluster (1 master, 2 workers)
+Vagrant.configure("2") do |config|
+    # Define a common base configuration for all VMs
+    config.vm.box = "ubuntu/focal64"  # Ubuntu 20.04
+  
+    # Define the master node
+    config.vm.define "k3s-master" do |master|
+      master.vm.hostname = "k3s-master"
+      master.vm.network "private_network", ip: "192.168.56.10"
+      master.vm.provider "virtualbox" do |vb|
+        vb.memory = "2048"
+        vb.cpus = 2
+      end
+      master.vm.provision "shell", path: "k3s-master.sh"
+    end
+  
+    # Define the first worker node
+    config.vm.define "k3s-worker1" do |worker1|
+      worker1.vm.hostname = "k3s-worker1"
+      worker1.vm.network "private_network", ip: "192.168.56.11"
+      worker1.vm.provider "virtualbox" do |vb|
+        vb.memory = "1024"
+        vb.cpus = 1
+      end
+      worker1.vm.provision "shell", path: "k3s-worker.sh", args: ["192.168.56.10"]
+    end
+  end
