@@ -13,4 +13,4 @@ wget -q https://get.k3s.io -O /tmp/k3s-install.sh
 chmod +x /tmp/k3s-install.sh
 
 # Install k3s agent
-K3S_URL="https://192.168.56.10:6443" K3S_TOKEN=$(cat /vagrant/token) /tmp/k3s-install.sh agent
+K3S_URL="https://192.168.56.110:6443" K3S_TOKEN=$(cat /vagrant/token) /tmp/k3s-install.sh agent
