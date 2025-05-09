@@ -3,6 +3,7 @@
 # Install required packages
 apt-get update
 apt-get install -y curl wget
+apt-get install -y net-tools
 
 # Download k3s binary directly
 wget -q https://github.com/k3s-io/k3s/releases/download/v1.27.8%2Bk3s1/k3s -O /usr/local/bin/k3s
